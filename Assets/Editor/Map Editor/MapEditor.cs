@@ -1,4 +1,4 @@
-using Project.Scripts.Data_Script;
+ï»¿using Project.Scripts.Data_Script;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -30,9 +30,9 @@ public class MapEditor : EditorWindow
         public List<GimmickData> gimmicks;
         public int dataType;
 
-        // wallÀÏ °æ¿ì »ç¿ëÇÒ µ¥ÀÌÅÍ
+        // wallì¼ ê²½ìš° ì‚¬ìš©í•  ë°ì´í„°
         public WallDirection wallDirection;
-        // ÄÃ·¯ 
+        // ì»¬ëŸ¬ 
         public WallGimmickType wallGimmickType;
 
     }
@@ -68,30 +68,30 @@ public class MapEditor : EditorWindow
 
     private void ColorSetting()
     {
-        GUILayout.Label("»ç¿ëÇÒ »ö", EditorStyles.boldLabel);
+        GUILayout.Label("ì‚¬ìš©í•  ìƒ‰", EditorStyles.boldLabel);
         GUILayout.Space(10);
 
         for (int i = 1; i < colorOptions.Length; i++)
         {
             GUILayout.BeginHorizontal();
 
-            // »ö ¹Ì¸®º¸±â ¹Ú½º
+            // ìƒ‰ ë¯¸ë¦¬ë³´ê¸° ë°•ìŠ¤
             Color originalColor = GUI.color;
             GUI.color = colors[i];
             GUILayout.Box("", GUILayout.Width(20), GUILayout.Height(20));
             GUI.color = originalColor;
 
-            // »ö ÀÌ¸§°ú ¼±ÅÃ ¹öÆ°
+            // ìƒ‰ ì´ë¦„ê³¼ ì„ íƒ ë²„íŠ¼
             GUILayout.Label(colorOptions[i], GUILayout.Width(100));
 
             if (colorSet[i])
             {
-                if (GUILayout.Button("< ¼±ÅÃµÊ", EditorStyles.boldLabel, GUILayout.Width(80)))
+                if (GUILayout.Button("< ì„ íƒë¨", EditorStyles.boldLabel, GUILayout.Width(80)))
                 {
                     colorSet[i] = false;
                 }
             }
-            else if (GUILayout.Button("¼±ÅÃ", GUILayout.Width(60)))
+            else if (GUILayout.Button("ì„ íƒ", GUILayout.Width(60)))
             {
                 colorSet[i] = true;
             }
@@ -111,13 +111,13 @@ public class MapEditor : EditorWindow
         var oldLabelWidth = EditorGUIUtility.labelWidth;
         EditorGUIUtility.labelWidth = 90;
 
-        // ¸Ê µ¥ÀÌÅÍ ÀÔ·Â
+        // ë§µ ë°ì´í„° ì…ë ¥
 
         InitData();
 
         GUILayout.Space(20);
 
-        // ¹öÆ°À» ÁöÁ¤µÈ ÁÂÇ¥¿¡ ¹èÄ¡ (x, y, width, height)
+        // ë²„íŠ¼ì„ ì§€ì •ëœ ì¢Œí‘œì— ë°°ì¹˜ (x, y, width, height)
         Rect buttonRect = new Rect(350, 0, 150, 40);
         if (currentLevelDataSO != null)
         {
@@ -125,13 +125,13 @@ public class MapEditor : EditorWindow
         }
         else
         {
-            if (GUI.Button(buttonRect, "Stage Data »ı¼º"))
+            if (GUI.Button(buttonRect, "Stage Data ìƒì„±"))
             {
                 CreateMyDataAsset();
             }
         }
         buttonRect = new Rect(550, 0, 75, 40);
-        if (GUI.Button(buttonRect, "½ÃÀÛ"))
+        if (GUI.Button(buttonRect, "ì‹œì‘"))
         {
             EditorApplication.isPlaying = !EditorApplication.isPlaying;
         }
@@ -143,23 +143,23 @@ public class MapEditor : EditorWindow
 
         StageData asset = ScriptableObject.CreateInstance<StageData>();
 
-        // °æ·Î ¼³Á¤
+        // ê²½ë¡œ ì„¤ì •
         string path = "Assets/Project/Resource/Data/StageData So";
         if (!Directory.Exists(path))
             Directory.CreateDirectory(path);
 
         string uniquePath = AssetDatabase.GenerateUniqueAssetPath($"{path}/StageData.asset");
 
-        // ¿¡¼Â »ı¼º ¹× ÀúÀå
+        // ì—ì…‹ ìƒì„± ë° ì €ì¥
         AssetDatabase.CreateAsset(asset, uniquePath);
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
 
-        // »ı¼ºµÈ ÆÄÀÏÀ» ¼±ÅÃ
+        // ìƒì„±ëœ íŒŒì¼ì„ ì„ íƒ
         EditorUtility.FocusProjectWindow();
         Selection.activeObject = asset;
 
-        Debug.Log("ScriptableObject »ı¼º ¿Ï·á: " + uniquePath);
+        Debug.Log("ScriptableObject ìƒì„± ì™„ë£Œ: " + uniquePath);
         levelDbObj = EditorGUILayout.ObjectField("Asset", asset, typeof(StageData), false, GUILayout.Width(340));
         currentLevelDataSO = (StageData)levelDbObj;
     }
@@ -186,7 +186,7 @@ public class MapEditor : EditorWindow
 
         GUILayout.Space(10);
 
-        // º¸µå Àü¿¡ ¼¼ÆÃ ÇÒ ¼ö ÀÖ´Â °ø°£ÀÌ ÀÖÀ¸¸é ÁÁÀ½
+        // ë³´ë“œ ì „ì— ì„¸íŒ… í•  ìˆ˜ ìˆëŠ” ê³µê°„ì´ ìˆìœ¼ë©´ ì¢‹ìŒ
 
         GUILayout.BeginHorizontal();
         EditorGUILayout.LabelField(new GUIContent("column"),
@@ -214,7 +214,7 @@ public class MapEditor : EditorWindow
 
         GUILayout.Space(10f);
 
-        GUILayout.Label("¼±ÅÃ");
+        GUILayout.Label("ì„ íƒ");
 
         if (currentData != null && (currentData.row > 0 && currentData.col > 0 && currentData.row < row + 2 && currentData.col < column + 2))
         {
@@ -252,9 +252,9 @@ public class MapEditor : EditorWindow
 
         GimmickSet();
 
-        // ¿øÇÏ´Â À§Ä¡¿¡ Rect »ı¼º (x, y, width, height)
+        // ì›í•˜ëŠ” ìœ„ì¹˜ì— Rect ìƒì„± (x, y, width, height)
         Rect popupRect = new Rect(190, 495, 75, 20);
-        // ÆË¾÷ Á÷Á¢ ±×¸®±â
+        // íŒì—… ì§ì ‘ ê·¸ë¦¬ê¸°
         selectedColorIndex = EditorGUI.Popup(popupRect, selectedColorIndex, colorOptions);
         selectedBoardPosition = new Vector2Int(currentData.col - 1, currentData.row - 1);
 
@@ -262,7 +262,7 @@ public class MapEditor : EditorWindow
         {
             tempShapeData = new ShapeData();
 
-            // ÇöÀç À§Ä¡¿¡ ÇØ´çÇÏ´Â ±âÁ¸ ºí·Ï ±×·ì Á¦°Å ½Ãµµ
+            // í˜„ì¬ ìœ„ì¹˜ì— í•´ë‹¹í•˜ëŠ” ê¸°ì¡´ ë¸”ë¡ ê·¸ë£¹ ì œê±° ì‹œë„
             foreach (var block in playerBlocks)
             {
                 for (int i = 0; i < block.shapes.Count; i++)
@@ -273,7 +273,7 @@ public class MapEditor : EditorWindow
                         block.shapes.RemoveAt(i);
                         if (block.shapes.Count <= 0)
                         {
-                            // shapeÀÌ ¾ø¾î¿ä!
+                            // shapeì´ ì—†ì–´ìš”!
                             currentLevelDataSO.playingBlocks.Remove(block);
                             Debug.Log("1");
                         }
@@ -282,7 +282,7 @@ public class MapEditor : EditorWindow
                 }
             }
 
-            // »õ·Î¿î ºí·Ï Ãß°¡
+            // ìƒˆë¡œìš´ ë¸”ë¡ ì¶”ê°€
             var targetBlock = playerBlocks.FirstOrDefault(p => p.colorType == (ColorType)selectedColorIndex);
             PlayingBlockData target = null;
             foreach (var t in playerBlocks)
@@ -319,7 +319,7 @@ public class MapEditor : EditorWindow
         }
         else if (selectedColorIndex == 0)
         {
-            // »ö»ó Á¦°Å: ±âÁ¸ ºí·Ï¿¡¼­ Á¦°Å
+            // ìƒ‰ìƒ ì œê±°: ê¸°ì¡´ ë¸”ë¡ì—ì„œ ì œê±°
             foreach (var block in playerBlocks)
             {
                 for (int i = 0; i < block.shapes.Count; i++)
@@ -330,7 +330,7 @@ public class MapEditor : EditorWindow
                         block.shapes.RemoveAt(i);
                         if (block.shapes.Count <= 0)
                         {
-                            // shapeÀÌ ¾ø¾î¿ä!
+                            // shapeì´ ì—†ì–´ìš”!
                             currentLevelDataSO.playingBlocks.Remove(block);
                             Debug.Log("0");
                         }
@@ -346,7 +346,7 @@ public class MapEditor : EditorWindow
             Debug.Log("Empty Color");
             //selectedBoardPosition = new Vector2Int(currentData.col - 1, currentData.row - 1);
 
-            // ÀÌÁ¦ »öÀ» Ä¥ÇØÁÖ°í »õ·Î¿î PlayerBlocks¸¦ ¾÷µ¥ÀÌÆ® ÇÔ .
+            // ì´ì œ ìƒ‰ì„ ì¹ í•´ì£¼ê³  ìƒˆë¡œìš´ PlayerBlocksë¥¼ ì—…ë°ì´íŠ¸ í•¨ .
             PlayingBlockData newBlock = new PlayingBlockData
             {
                 colorType = (ColorType)selectedColorIndex,
@@ -361,7 +361,7 @@ public class MapEditor : EditorWindow
         }
     }
 
-    // º®À» ´©¸£¸é »ı¼ºµÇ¾î¾ß ÇÒ µ¥ÀÌÅÍ 
+    // ë²½ì„ ëˆ„ë¥´ë©´ ìƒì„±ë˜ì–´ì•¼ í•  ë°ì´í„° 
     //             WallDirection 
     //             lengh
     //              gimmick
@@ -387,24 +387,24 @@ public class MapEditor : EditorWindow
 
         GUILayout.EndHorizontal();
 
-        // ¿øÇÏ´Â À§Ä¡¿¡ Rect »ı¼º (x, y, width, height)
+        // ì›í•˜ëŠ” ìœ„ì¹˜ì— Rect ìƒì„± (x, y, width, height)
         Rect popupRect = new Rect(190, 495, 75, 20);
-        // ÆË¾÷ Á÷Á¢ ±×¸®±â
+        // íŒì—… ì§ì ‘ ê·¸ë¦¬ê¸°
         selectedColorIndex = EditorGUI.Popup(popupRect, selectedColorIndex, colorOptions);
         //selectedBoardPosition = new Vector2Int(currentData.col - 1, currentData.row - 1);
 
         GUILayout.BeginHorizontal();
         EditorGUILayout.LabelField(new GUIContent("Gimmick"),
             GUILayout.Width(EditorGUIUtility.labelWidth));
-        EditorGUILayout.LabelField(gimmickOptions[(int)currentData.wallGimmickType]);
+        EditorGUILayout.LabelField(wallGimmickOptions[(int)currentData.wallGimmickType]);
 
         GUILayout.EndHorizontal();
 
         popupRect = new Rect(190, 515, 75, 20);
-        // ÆË¾÷ Á÷Á¢ ±×¸®±â
+        // íŒì—… ì§ì ‘ ê·¸ë¦¬ê¸°
         selectedWallIndex = EditorGUI.Popup(popupRect, selectedWallIndex, wallGimmickOptions);
 
-        // µ¥ÀÌÅÍ ¾÷µ¥ÀÌÆ®
+        // ë°ì´í„° ì—…ë°ì´íŠ¸
         //selectedBoardPosition = new Vector2Int(currentData.col - 1, currentData.row - 1);
 
         //WallColorUpdate();
@@ -416,7 +416,7 @@ public class MapEditor : EditorWindow
     {
         if ((ColorType)selectedColorIndex != currentData.color)
         {
-            // »öÀ» Ä¥ÇØ
+            // ìƒ‰ì„ ì¹ í•´
             currentData.color = (ColorType)selectedColorIndex;
 
             NewWallUpdate();
@@ -428,9 +428,9 @@ public class MapEditor : EditorWindow
         WallContainer.Clear();
 
         WallData tempWall = null;
-        // 4¹æÇâ ¹®À» Ã¼Å©
+        // 4ë°©í–¥ ë¬¸ì„ ì²´í¬
 
-        // ¾Æ·¡ºÎÅÍ
+        // ì•„ë˜ë¶€í„°
 
         tempWall = new WallData();
         tempWall.x = 1 - 1;
@@ -457,7 +457,7 @@ public class MapEditor : EditorWindow
             }
         }
         WallContainer.Add(tempWall);
-        // À§
+        // ìœ„
 
         tempWall = new WallData();
         tempWall.x = 1 - 1;
@@ -486,7 +486,7 @@ public class MapEditor : EditorWindow
         }
         WallContainer.Add(tempWall);
 
-        // ÁÂ
+        // ì¢Œ
         tempWall = new WallData();
         tempWall.x = 0;
         tempWall.y = 1 - 1;
@@ -514,7 +514,7 @@ public class MapEditor : EditorWindow
         }
         WallContainer.Add(tempWall);
 
-        // ¿ì
+        // ìš°
         tempWall = new WallData();
         tempWall.x = column;
         tempWall.y = 1 - 1;
@@ -608,7 +608,7 @@ public class MapEditor : EditorWindow
                 {
                     case WallDirection.Single_Up:
                     case WallDirection.Single_Down:
-                        // ¼öÆò º® (°¡·ÎÁÙ)
+                        // ìˆ˜í‰ ë²½ (ê°€ë¡œì¤„)
                         if (tile.row == wall.y || tile.row - 2 == wall.y)
                         {
                             for (int i = 0; i < wall.length; i++)
@@ -626,7 +626,7 @@ public class MapEditor : EditorWindow
 
                     case WallDirection.Single_Left:
                     case WallDirection.Single_Right:
-                        // ¼öÁ÷ º® (¼¼·ÎÁÙ)
+                        // ìˆ˜ì§ ë²½ (ì„¸ë¡œì¤„)
                         if (tile.col == wall.x || tile.col - 2 == wall.x)
                         {
                             for (int i = 0; i < wall.length; i++)
@@ -659,9 +659,9 @@ public class MapEditor : EditorWindow
                     Debug.Log($"Wall Match Found: {wall.x}, {wall.y} - Direction: {wall.WallDirection}");
                     currentData.color = (ColorType)selectedColorIndex;
                     wall.length += 1;
-                    //// TODO: °ãÄ¡´Â º® Á¦°Å ·ÎÁ÷ÀÌ ¿©±â Ãß°¡µÇ¾î¾ß ÇÔ
-                    // ÀÌÁ¦ Áö¿öÁÖ´Â °Íµµ ¸¸µé¾î¾ßÇÔ...
-                    // ¾î¶»°Ô Áö¿öÁÙ±î...
+                    //// TODO: ê²¹ì¹˜ëŠ” ë²½ ì œê±° ë¡œì§ì´ ì—¬ê¸° ì¶”ê°€ë˜ì–´ì•¼ í•¨
+                    // ì´ì œ ì§€ì›Œì£¼ëŠ” ê²ƒë„ ë§Œë“¤ì–´ì•¼í•¨...
+                    // ì–´ë–»ê²Œ ì§€ì›Œì¤„ê¹Œ...
                 }
             }
         }
@@ -674,12 +674,12 @@ public class MapEditor : EditorWindow
                 int cur = 0;
                 if (currentData.color == wall.wallColor)
                     continue;
-                // ¸ÅÄ¡°¡ µÈ º®À» Ã£´Â ³»¿ë.
+                // ë§¤ì¹˜ê°€ ëœ ë²½ì„ ì°¾ëŠ” ë‚´ìš©.
                 switch (wall.WallDirection)
                 {
                     case WallDirection.Single_Up:
                     case WallDirection.Single_Down:
-                        // ¼öÆò º® (°¡·ÎÁÙ)
+                        // ìˆ˜í‰ ë²½ (ê°€ë¡œì¤„)
                         if (currentData.row == wall.y || currentData.row - 2 == wall.y)
                         {
                             for (int i = 0; i < wall.length; i++)
@@ -699,7 +699,7 @@ public class MapEditor : EditorWindow
 
                     case WallDirection.Single_Left:
                     case WallDirection.Single_Right:
-                        // ¼öÁ÷ º® (¼¼·ÎÁÙ)
+                        // ìˆ˜ì§ ë²½ (ì„¸ë¡œì¤„)
                         if (tile.col == wall.x || tile.col - 2 == wall.x)
                         {
                             for (int i = 0; i < wall.length; i++)
@@ -743,7 +743,7 @@ public class MapEditor : EditorWindow
                                 }
                                 else
                                 {
-                                    // °¡¸£°Å³ª wall.lengh - 1 == curÀÏ °æ¿ì lengh ¸¸ ÁÙ¿©ÁÜ.
+                                    // ê°€ë¥´ê±°ë‚˜ wall.lengh - 1 == curì¼ ê²½ìš° lengh ë§Œ ì¤„ì—¬ì¤Œ.
                                 }
 
                             }
@@ -798,10 +798,10 @@ public class MapEditor : EditorWindow
 
     private void WallColorUpdate()
     {
-        // ÄÃ·¯ ÀÎµ¦½º°¡ 1ÀÌ»óÀÌ¸é¼­ ÇöÀç ÄÃ·¯¿Í ´Ù¸£°í, ÁÂ ¿ì¸¦ Å½»öÇßÀ» ¶§ °°Àº »öÀÌ ÀÖÀ» °æ¿ì
+        // ì»¬ëŸ¬ ì¸ë±ìŠ¤ê°€ 1ì´ìƒì´ë©´ì„œ í˜„ì¬ ì»¬ëŸ¬ì™€ ë‹¤ë¥´ê³ , ì¢Œ ìš°ë¥¼ íƒìƒ‰í–ˆì„ ë•Œ ê°™ì€ ìƒ‰ì´ ìˆì„ ê²½ìš°
         if (selectedColorIndex > 0 && (ColorType)selectedColorIndex != currentData.color)
         {
-            // ÁÂ ¶Ç´Â ¿ì¿¡ Á¸ÀçÇÑ´Ù´Â °ÍÀ» Ã¼Å© 
+            // ì¢Œ ë˜ëŠ” ìš°ì— ì¡´ì¬í•œë‹¤ëŠ” ê²ƒì„ ì²´í¬ 
             if (currentData.col == 0 || currentData.col == column + 1)
             {
                 if (tileData[currentData.row + 1][currentData.col].color == (ColorType)selectedColorIndex)
@@ -816,7 +816,7 @@ public class MapEditor : EditorWindow
                 }
                 else
                 {
-                    Debug.Log("¾Æ¿¹ ¾ø´Â °æ¿ì");
+                    Debug.Log("ì•„ì˜ˆ ì—†ëŠ” ê²½ìš°");
                 }
             }
             else if (currentData.row == 0 || currentData.row == row + 1)
@@ -833,8 +833,8 @@ public class MapEditor : EditorWindow
                 }
                 else
                 {
-                    Debug.Log("¾Æ¿¹ ¾ø´Â °æ¿ì");
-                    // wall container¸¦ ºĞ·ùÇÒ ÇÊ¿ä°¡ ÀÖÀ½.
+                    Debug.Log("ì•„ì˜ˆ ì—†ëŠ” ê²½ìš°");
+                    // wall containerë¥¼ ë¶„ë¥˜í•  í•„ìš”ê°€ ìˆìŒ.
                 }
             }
         }
@@ -843,7 +843,7 @@ public class MapEditor : EditorWindow
         //    Debug.Log("Empty Color");
         //    //selectedBoardPosition = new Vector2Int(currentData.col - 1, currentData.row - 1);
 
-        //    // ÀÌÁ¦ »öÀ» Ä¥ÇØÁÖ°í »õ·Î¿î PlayerBlocks¸¦ ¾÷µ¥ÀÌÆ® ÇÔ .
+        //    // ì´ì œ ìƒ‰ì„ ì¹ í•´ì£¼ê³  ìƒˆë¡œìš´ PlayerBlocksë¥¼ ì—…ë°ì´íŠ¸ í•¨ .
         //    PlayingBlockData newBlock = new PlayingBlockData
         //    {
         //        colorType = (ColorType)selectedColorIndex,
@@ -865,7 +865,11 @@ public class MapEditor : EditorWindow
 
     private void WallGimmickUpdate()
     {
-
+        if(currentData.wallGimmickType != (WallGimmickType)selectedWallIndex)
+        {
+            currentData.wallGimmickType = (WallGimmickType)selectedWallIndex;
+            NewWallUpdate();
+        }
     }
 
     private void GimmickSet()
@@ -883,20 +887,20 @@ public class MapEditor : EditorWindow
             GUILayout.BeginHorizontal();
 
             prev = gimmickSet[i];
-            // Ã¼Å©¹Ú½º·Î ¼±ÅÃ ¿©ºÎ Ç¥½Ã
-            cur = GUILayout.Toggle(gimmickSet[i], "¼±ÅÃ", GUILayout.Width(80));
+            // ì²´í¬ë°•ìŠ¤ë¡œ ì„ íƒ ì—¬ë¶€ í‘œì‹œ
+            cur = GUILayout.Toggle(gimmickSet[i], "ì„ íƒ", GUILayout.Width(80));
 
             if (prev != cur)
             {
                 gimmickSet[i] = cur;
                 if (cur)
                 {
-                    // ±â¹Í Ãß°¡ 
+                    // ê¸°ë¯¹ ì¶”ê°€ 
 
                 }
                 else
                 {
-                    // ±â¹Í Á¦°Å
+                    // ê¸°ë¯¹ ì œê±°
 
                 }
             }
@@ -928,7 +932,7 @@ public class MapEditor : EditorWindow
         if (currentLevelDataSO.boardBlocks.Count < 0)
             return;
 
-        // ÀÏ´Ü ¶ç¿ì´Â °ÍºÎÅÍ ÇØºÁ ¹¹ºÎÅÍ? ¹Ù´ÚºÎÅÍ ±×·ÁºÁ
+        // ì¼ë‹¨ ë„ìš°ëŠ” ê²ƒë¶€í„° í•´ë´ ë­ë¶€í„°? ë°”ë‹¥ë¶€í„° ê·¸ë ¤ë´
         GUILayout.Space(tileSize * 0.5f);
         GUILayout.BeginHorizontal();
         GUILayout.Space(tileSize * 0.5f);
@@ -944,8 +948,8 @@ public class MapEditor : EditorWindow
 
         int boardPixelWidth = (column + 4) * tileSize;
 
-        // ¹öÆ° UI ¿µ¿ª ½ÃÀÛ (¿ŞÂÊ »ó´Ü °íÁ¤)
-        GUILayout.BeginArea(new Rect(300, 100, boardPixelWidth, 9999)); // x=10À¸·Î ¿ŞÂÊ Á¤·Ä
+        // ë²„íŠ¼ UI ì˜ì—­ ì‹œì‘ (ì™¼ìª½ ìƒë‹¨ ê³ ì •)
+        GUILayout.BeginArea(new Rect(300, 100, boardPixelWidth, 9999)); // x=10ìœ¼ë¡œ ì™¼ìª½ ì •ë ¬
         for (int y = row + 2; y >= 0; y--)
         {
             GUILayout.BeginHorizontal(GUILayout.ExpandWidth(false));
@@ -966,9 +970,9 @@ public class MapEditor : EditorWindow
 
         if (boardData.row > 0 && boardData.col > 0 && boardData.col < column + 2 && boardData.row < row + 2)
         {
-            if (GUILayout.Button("Å¸ÀÏ", GUILayout.Width(tileSize), GUILayout.Height(tileSize)))
+            if (GUILayout.Button("íƒ€ì¼", GUILayout.Width(tileSize), GUILayout.Height(tileSize)))
             {
-                Debug.Log($"ÁÂÇ¥ {boardData.col - 1} / {boardData.row - 1}");
+                Debug.Log($"ì¢Œí‘œ {boardData.col - 1} / {boardData.row - 1}");
                 currentData = boardData;
                 if (boardData.gimmicks != null)
                 {
@@ -990,9 +994,9 @@ public class MapEditor : EditorWindow
         else if (!(boardData.row == 0 && boardData.col == 0) && !(boardData.row == 0 && boardData.col == column + 2) &&
                  !(boardData.row == row + 2 && boardData.col == 0) && !(boardData.row == row + 2 && boardData.col == column + 2))
         {
-            if (GUILayout.Button("º®", GUILayout.Width(tileSize), GUILayout.Height(tileSize)))
+            if (GUILayout.Button("ë²½", GUILayout.Width(tileSize), GUILayout.Height(tileSize)))
             {
-                Debug.Log($"º® : {boardData.col} / {boardData.row}");
+                Debug.Log($"ë²½ : {boardData.col} / {boardData.row}");
                 currentData = boardData;
                 selectedColorIndex = (int)currentData.color;
             }
@@ -1005,8 +1009,8 @@ public class MapEditor : EditorWindow
 
     private bool CheckColorLRTB(int x, int y)
     {
-        // 4¹æÇâ Áß °°Àº »ö»ó°ú ¿¬°áÀÌ µÈ´Ù¸é?
-        // ¶Ç´Â ¿¬°áµÈ »ö»óÀÌ ¾ø´Ù¸é?
+        // 4ë°©í–¥ ì¤‘ ê°™ì€ ìƒ‰ìƒê³¼ ì—°ê²°ì´ ëœë‹¤ë©´?
+        // ë˜ëŠ” ì—°ê²°ëœ ìƒ‰ìƒì´ ì—†ë‹¤ë©´?
         if (x > 0 && x < column + 2 && tileData[y][x].color == (ColorType)selectedColorIndex)
         {
             return true;
@@ -1104,7 +1108,7 @@ public class MapEditor : EditorWindow
                     for (int x = 0; x <= column + 2; x++)
                     {
                         tempTile = new EditTileData();
-                        // ÀÏ¹İ Å¸ÀÏ
+                        // ì¼ë°˜ íƒ€ì¼
                         if (y != 0 && x != 0 && x != column + 2 && y != row + 2)
                         {
                             tempTile.col = x;
@@ -1112,7 +1116,7 @@ public class MapEditor : EditorWindow
                             tempTile.colorTypes = currentLevelDataSO.boardBlocks[count].colorType;
                             count++;
                         }
-                        // ¹® 
+                        // ë¬¸ 
                         else
                         {
                             tempTile.col = x;
@@ -1154,7 +1158,7 @@ public class MapEditor : EditorWindow
                 {
                     playerBlocks.Add(pBlocks);
 
-                    // »öÀÌ µîÀåÇÑ °ÍÀ¸·Î Ã¼Å©
+                    // ìƒ‰ì´ ë“±ì¥í•œ ê²ƒìœ¼ë¡œ ì²´í¬
                     colorSet[(int)pBlocks.colorType - 1] = true;
 
                     foreach (var shapes in pBlocks.shapes)
@@ -1262,11 +1266,11 @@ public class MapEditor : EditorWindow
             try
             {
                 var check = JsonUtility.FromJson<StageData>(currentLevelDataJson.text);
-                Debug.Log("À¯È¿ÇÑ µ¥ÀÌÅÍ");
+                Debug.Log("ìœ íš¨í•œ ë°ì´í„°");
             }
             catch
             {
-                Debug.LogError("À¯È¿ÇÏÁö ¾ÊÀº µ¥ÀÌÅÍ");
+                Debug.LogError("ìœ íš¨í•˜ì§€ ì•Šì€ ë°ì´í„°");
                 currentLevelDataJson = null;
             }
         }

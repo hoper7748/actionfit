@@ -1,7 +1,7 @@
 # Block Editor System
 
 ## 작성된 코드
-# BardController
+### BardController
 - BoardController+CreateBoard => BoardController에서 보드의 크기에 따라 동적으로 새로운 보드를 만들어주는 기능을 분리. 
 - BoardController+CreatePlayingBlock => BoardController에서 사용자가 조작할 수 있는 블럭을 생성 기능을 분리.
 - BoardController+CreateWall => BoardCOntroller에서 블럭과 상호작용이 가능한 벽을 만드는 기능을 분리.

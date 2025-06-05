@@ -11,7 +11,7 @@
 - CollisionHandler => BlockDragHandler에서 블럭에 충돌이 가해지면 실행되는 기능을 분리.
 - DragMovementHandler => BlockDragHandler에서 사용자의 조작에 따라 블럭을 움직이는 기능을 분리
 
-#### MapEditor
+## MapEditor
 - 맵 에디터
 
 ## 사용법
